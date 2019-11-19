@@ -17,6 +17,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+/**
+ * @author 偏执
+ */
 @WebServlet(urlPatterns = "/*")
 public class CorsFilter implements Filter {
     private static Logger logger = LoggerFactory.getLogger(CorsFilter.class);
@@ -24,6 +27,7 @@ public class CorsFilter implements Filter {
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
         logger.info("跨越过滤器初始化");
+        System.out.println("跨域");
     }
 
     @Override

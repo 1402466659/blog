@@ -14,6 +14,7 @@ import blog.domain.UserDto;
 import blog.entity.User;
 import blog.factory.DaoFactory;
 import blog.service.UserService;
+import blog.util.DbUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -33,10 +34,9 @@ public class UserServiceImpl implements UserService {
         } catch (SQLException e) {
             logger.error("根据手机号查询用户出现异常");
         }
-        System.out.println(user);
         if(user!=null){
             if(user.getPassword().equals(userdto.getPassword())){
-                map.put("msg","登陆成功");
+                map.put("msg","登录成功");
                 map.put("data",user);
             }else{
                 map.put("msg","密码错误");

@@ -18,4 +18,5 @@ public interface ArticleDao {
     int[] batchInsertArticle (List<Article> articlelist) throws SQLException;
     List<Article> selectAll() throws SQLException;
     void insertDetail(List detailmessage) throws SQLException;
+    public void insertpic(List articlepic) throws SQLException;
 }

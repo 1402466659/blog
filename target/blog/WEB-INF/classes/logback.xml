@@ -45,7 +45,7 @@
         </rollingPolicy>
     </appender>
 
-    <logger name="com.scs.software1821.blog">
+    <logger name="blog">
         <level value="INFO" />
         <appender-ref ref="STDOUT" />
         <appender-ref ref="FILE" />

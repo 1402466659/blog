@@ -11,6 +11,9 @@ package blog.controller;
 
 
 import blog.domain.UserDto;
+import blog.entity.Article;
+import blog.entity.User;
+import blog.factory.DaoFactory;
 import blog.factory.ServiceFactory;
 import blog.service.UserService;
 import blog.util.ResponseObject;
@@ -27,6 +30,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
+import java.util.List;
 import java.util.Map;
 
 @WebServlet(urlPatterns = "/sign-in")
@@ -60,5 +65,22 @@ public class UserController extends HttpServlet {
         PrintWriter out = resp.getWriter();
         out.print(gson.toJson(ro));
         out.close();
+    }
+
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+            List<User> userList = null;
+            try{
+                userList = DaoFactory.getUserDaoImpl().selectAlluser();
+            }
+            catch(SQLException e){
+                logger.error("获取所有学生信息失败");
+                e.printStackTrace();
+            }
+            PrintWriter out = resp.getWriter();
+            Gson gson = new GsonBuilder().create();
+            ResponseObject ro = ResponseObject.success(200,"成功",userList);
+            out.print(gson.toJson(ro));
+            out.close();
     }
 }

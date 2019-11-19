@@ -15,22 +15,26 @@ import lombok.Data;
 public class Article {
     private  int id;
     private int userid;
+    private int projectid;
     private String title;
     private String Scontent;
     private String Ncomment;
     private String Nread;
     private String Lcontent;
+    private String avatar;
 
-    public Article(int id, int userid, String title, String scontent, String ncomment, String nread, String lcontent) {
+    public Article() {
+    }
+
+    public Article(int id, int userid, int projectid, String title, String scontent, String ncomment, String nread, String lcontent, String avatar) {
         this.id = id;
         this.userid = userid;
+        this.projectid = projectid;
         this.title = title;
         Scontent = scontent;
         Ncomment = ncomment;
         Nread = nread;
         Lcontent = lcontent;
-    }
-
-    public Article() {
+        this.avatar = avatar;
     }
 }

@@ -7,5 +7,5 @@ import java.util.List;
 
 public interface ProjectDao {
    int[] batchInsertProject(List listproject) throws SQLException;
-
+   List<Project> selectALLProject() throws SQLException;
 }

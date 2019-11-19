@@ -9,6 +9,7 @@
  */
 package blog.dao;
 
+import blog.entity.Article;
 import blog.entity.Project;
 import blog.util.DbUtil;
 import org.slf4j.Logger;
@@ -16,12 +17,14 @@ import org.slf4j.LoggerFactory;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
 public class ProjectDaoImpl implements ProjectDao{
-    private static Logger logger = LoggerFactory.getLogger(ArticleDapImpl.class);
+    private static Logger logger = LoggerFactory.getLogger(ArticleDaoImpl.class);
 
     @Override
     public int[] batchInsertProject(List listproject) throws SQLException {
@@ -44,5 +47,26 @@ public class ProjectDaoImpl implements ProjectDao{
         connection.commit();
         DbUtil.close(null,pstmt,connection);
         return result;
+    }
+
+    @Override
+    public List<Project> selectALLProject() throws SQLException {
+        List<Project> projectList = new ArrayList<>();
+        Connection connection = DbUtil.getConnection();
+        connection.setAutoCommit(false);
+        String sql = " SELECT * FROM t_project ";
+        PreparedStatement pstmt = connection.prepareStatement(sql);
+        ResultSet rs = pstmt.executeQuery();
+        while (rs.next()){
+            Project project = new Project();
+            project.setId(rs.getInt("id"));
+            project.setProjectname(rs.getString("projectname"));
+            project.setProjectarticles(rs.getInt("projectarticles"));
+            project.setProjectfollows(rs.getInt("projectfollows"));
+            projectList.add(project);
+        }
+        connection.commit();
+//        DbUtil.close(rs,pstmt,connection);
+        return projectList;
     }
 }

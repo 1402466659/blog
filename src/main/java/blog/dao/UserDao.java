@@ -9,6 +9,7 @@
  */
 package blog.dao;
 
+import blog.entity.Article;
 import blog.entity.User;
 
 import java.sql.SQLException;
@@ -17,4 +18,5 @@ import java.util.List;
 public interface UserDao {
     int[] batchInsert (List<User> userlist) throws SQLException;
     User findUserByMobile(String mobile) throws SQLException;
+    List<User> selectAlluser() throws SQLException;
 }

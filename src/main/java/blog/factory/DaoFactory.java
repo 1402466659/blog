@@ -18,6 +18,6 @@ public class DaoFactory {
     public static UserDao getUserDaoImpl (){
         return new UserDaoImpl();
     }
-    public static ArticleDao getArticleImpl(){ return new ArticleDapImpl(); }
+    public static ArticleDao getArticleImpl(){ return new ArticleDaoImpl(); }
     public static ProjectDaoImpl getProjectImpl(){ return new ProjectDaoImpl(); }
 }

@@ -1,7 +1,6 @@
 package blog.util;
 
 
-import blog.dao.ArticleDapImpl;
 import blog.entity.Article;
 import blog.entity.User;
 import org.jsoup.Jsoup;
@@ -12,11 +11,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
-import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 
 /**
@@ -153,6 +150,29 @@ public class JSoupSpider {
         listproject.add("文学");
         listproject.add("游戏");
         return listproject;
+    }
+
+
+
+    public static List getArticlePic() {
+        Document document = null;
+        List<User> userList = new ArrayList<>(100);
+        List articlepic = new ArrayList();
+        for (int i = 1; i <= 10; i++) {
+            try {
+                document = Jsoup.connect("https://www.jianshu.com/recommendations/users?utm_source=desktop&utm_medium=index-users&page=" + i).get();
+            } catch (IOException e) {
+                logger.error("连接失败");
+            }
+            Elements divs = document.getElementsByClass("col-xs-8");
+            divs.forEach(div -> {
+                Element wrapDiv = div.child(0);
+                Element link = wrapDiv.child(0);
+                Elements linkChildren = link.children();
+                articlepic.add("https:" + linkChildren.get(0).attr("src"));
+            });
+        }
+        return articlepic;
     }
 
 }

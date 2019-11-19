@@ -1,1 +1,1 @@
-2019-11-16.16:32:41 ERROR [main] blog.dao.ArticleDapImpl.batchInsertProject:22  批量新增文章出现异常
+2019-11-16.16:32:41 ERROR [main] blog.dao.ArticleDaoImpl.batchInsertProject:22  批量新增文章出现异常

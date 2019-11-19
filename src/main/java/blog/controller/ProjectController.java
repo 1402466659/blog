@@ -1,7 +1,7 @@
 /**
- * FileName: ArticleController
+ * FileName: ProjectController
  * Author:   hy
- * Date:     2019/11/9 22:33
+ * Date:     2019/11/17 14:48
  * Description:
  * History:
  * <author>          <time>          <version>          <desc>
@@ -9,8 +9,8 @@
  */
 package blog.controller;
 
-import blog.domain.UserDto;
 import blog.entity.Article;
+import blog.entity.Project;
 import blog.factory.DaoFactory;
 import blog.util.ResponseObject;
 import com.google.gson.Gson;
@@ -23,30 +23,27 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
-@WebServlet(urlPatterns = {"/article","/article/*"})
-public class ArticleController extends HttpServlet {
+@WebServlet(urlPatterns = "/project")
+public class ProjectController extends HttpServlet {
     private static Logger logger = LoggerFactory.getLogger(UserController.class);
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        List<Article> articleList = null;
+        List<Project> projectList = null;
         try{
-            articleList = DaoFactory.getArticleImpl().selectAll();
+            projectList = DaoFactory.getProjectImpl().selectALLProject();
         }
         catch(SQLException e){
-            //logger.error("获取文章信息失败");
+            logger.error("获取所有专题信息失败");
             e.printStackTrace();
         }
         PrintWriter out = resp.getWriter();
         Gson gson = new GsonBuilder().create();
-        ResponseObject ro = ResponseObject.success(200,"成功",articleList);
+        ResponseObject ro = ResponseObject.success(200,"成功",projectList);
         out.print(gson.toJson(ro));
         out.close();
     }
